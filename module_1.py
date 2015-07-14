@@ -228,27 +228,27 @@ def get_top_3_suc_performer_by_discipline_by_year(discipline, school_year):
   dicPass = {}
   dicTake = {}
   dicRate  = {}
-  if school_year == "2010-2011":
+  if school_year == "2010":
     col = 3
-  elif school_year == "2011-2012":
+  elif school_year == "2011":
     col = 4
-  elif school_year == "2012-2013":
+  elif school_year == "2012":
     col = 5
   else:
-    print "7. ERROR! Not included in tha database"
+    print "8. ERROR! Not included in tha database"
     return 0
 
-  #for row in data:
-  #  try:
-  #    if dicPass.has_key(discipline):
-  #      if dicPass.has_key(row[1]):
-  #       dicPass[row[1] += int(row[col])
-  #        dicTake[row[1] += int(row[col+4)
-  #      else:
-  #        dicPass[row[1]] = int(row[col])
-  #        dicTake[row[1]] = int(row[col+4])
-  #  except Exception:
-  #    pass
+  for row in data:
+    try:
+      if row[2] == discipline:
+        if dicPass.has_key(row[1]):
+          dicPass[row[1]] += int(row[col])
+          dicTake[row[1]] += int(row[col+4])
+        else:
+          dicPass[row[1]] = int(row[col])
+          dicTake[row[1]] = int(row[col+4])
+    except Exception:
+      pass
   #print dicPass
   #print dicTake
 
@@ -258,7 +258,7 @@ def get_top_3_suc_performer_by_discipline_by_year(discipline, school_year):
         dicRate[d] = (float(dicTake[d] -  float(dicPass[d]))/float(dicTake[d]))
     except Exception:
       pass
-  print("8. list top 3 SUC with the most passing rate by discipline by school year") % ((sorted(dicRate.items(), key=lambda (n,m): (-m,n)))[0][0])
+  print("8. list top 3 SUC with the most passing rate by discipline by school year")
   print(" 1. %s") % ((sorted(dicRate.items(), key=lambda (n,m): (-m,n)))[0][0])
   print(" 2. %s") % ((sorted(dicRate.items(), key=lambda (n,m): (-m,n)))[1][0])
   print(" 3. %s") % ((sorted(dicRate.items(), key=lambda (n,m): (-m,n)))[2][0])
@@ -271,7 +271,7 @@ def main():
   get_top_3_most_expensive_by_school_year('BS', '2010-2011')
   all_suc_who_have_increased_tuition_fee()
   get_discipline_with_highest_passing_rate_by_shool_year('2010-2011')
-  #get_top_3_suc_performer_by_discipline_by_year('Accountancy', '2011')
+  get_top_3_suc_performer_by_discipline_by_year('Accountancy', '2011')
 
 
 # This is the standard boilerplate that calls the main() function.
